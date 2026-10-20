@@ -91,11 +91,22 @@
       position: absolute; bottom: max(24px, env(safe-area-inset-bottom)); left: 0; right: 0;
       display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; padding: 0 16px;
     }
-    .garden-actions button {
+    .garden-actions button, .garden-actions a {
       border: 1px solid #dcb9c8; background: #fffdfcf2; border-radius: 30px;
       padding: 12px 20px; font-size: 12px; box-shadow: 0 3px 16px #76364d0c;
+      color: inherit; text-decoration: none; display: inline-flex; align-items: center;
+      transition: background .2s, transform .2s;
     }
-    .garden-actions button:hover { background: #fae7ef; }
+    .garden-actions button:hover, .garden-actions a:hover { background: #fae7ef; transform: translateY(-1px); }
+    .header-back-wrap { display: flex; flex-direction: column; gap: 8px; pointer-events: auto; }
+    .garden-back-link {
+      display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px;
+      color: var(--ink); text-decoration: none; background: rgba(255, 253, 252, 0.9);
+      border: 1px solid #ebd0da; padding: 6px 14px; border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(118, 54, 77, 0.08); transition: all .2s ease;
+      width: fit-content;
+    }
+    .garden-back-link:hover { background: #fff; border-color: #d88fa5; transform: translateX(-2px); }
     dialog {
       width: min(480px, calc(100% - 36px)); max-height: calc(100svh - 36px);
       padding: 0; border: 0; overflow: auto; background: var(--paper); color: var(--ink);
@@ -159,7 +170,10 @@
 <body>
   <main class="garden" id="garden">
     <header class="page-header">
-      <p class="dedication">Dành bạn, cả một vườn thương.</p>
+      <div class="header-back-wrap">
+        <a class="garden-back-link" href="./index.html" aria-label="Trở về trang bó hoa 20/10">‹ Bó hoa 20/10</a>
+        <p class="dedication">Dành bạn, cả một vườn thương.</p>
+      </div>
       <p class="date"><span>20 / 10</span>Ngày Phụ nữ Việt Nam</p>
     </header>
     <canvas id="flowers" aria-hidden="true"></canvas>
@@ -172,6 +186,7 @@
     <nav class="garden-actions" id="actions" aria-label="Vườn hoa và thiệp" hidden>
       <button id="readCard" type="button" aria-haspopup="dialog" aria-controls="wishCard">Đọc lại thiệp</button>
       <button id="replay" type="button">Cho hoa nở lại</button>
+      <a class="garden-back-button" href="./index.html">‹ Trở về bó hoa</a>
     </nav>
     <dialog id="wishCard" aria-labelledby="cardTitle">
       <article class="letter">

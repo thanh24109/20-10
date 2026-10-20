@@ -6,6 +6,9 @@
   <meta name="theme-color" content="#fff8fa">
   <meta name="description" content="Một bó hoa và tấm thiệp nhỏ, gửi những lời chúc dịu dàng nhân ngày Phụ nữ Việt Nam 20/10.">
   <title>Một bó hoa dành tặng bạn · 20/10</title>
+  <link rel="preload" href="./assets/fonts/noto-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/noto-serif-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/noto-sans-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./style.css">
   <script src="./script.js" defer></script>
   <script src="./card.js" defer></script>
@@ -35,8 +38,14 @@
             var m = document.getElementById('bgMusic');
             if (m) {
               m.volume = 0.85;
-              var p = m.play();
-              if (p && p.catch) { p.catch(function() {}); }
+              try {
+                var savedPos = parseFloat(sessionStorage.getItem('music_saved_pos') || '0');
+                if (savedPos > 0) m.currentTime = savedPos;
+              } catch(e) {}
+              if (sessionStorage.getItem('music_user_paused') !== 'true') {
+                var p = m.play();
+                if (p && p.catch) { p.catch(function() {}); }
+              }
             }
           })();
         </script>

@@ -1,3 +1,25 @@
+@font-face {
+  font-family: "Noto Serif";
+  src: url("./assets/fonts/noto-serif-regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Serif";
+  src: url("./assets/fonts/noto-serif-italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans";
+  src: url("./assets/fonts/noto-sans-regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
   --paper: #fffdfb;
   --blush: #fff8fa;
@@ -6,8 +28,9 @@
   --muted: #916674;
   --line: #ecd3db;
   --bouquet-size: clamp(210px, calc(100dvh - 300px), 560px);
+  --font-serif: "Noto Serif", "Palatino Linotype", "Times New Roman", serif;
   color: var(--ink);
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Noto Sans", "Segoe UI", Arial, sans-serif;
   font-synthesis: none;
 }
 * { box-sizing: border-box; }
@@ -228,7 +251,7 @@ main {
 .portrait-photo { overflow: hidden; aspect-ratio: 3 / 4; background: #f3e4e5; }
 .portrait-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .portrait-card figcaption { padding: 19px 6px 20px; text-align: center; }
-.portrait-dedication { display: block; font: italic clamp(16px, 1.6vw, 21px)/1.45 "Palatino Linotype", Georgia, serif; text-wrap: pretty; }
+.portrait-dedication { display: block; font: italic clamp(16px, 1.6vw, 21px)/1.45 "Noto Serif", "Palatino Linotype", serif; text-wrap: pretty; }
 .portrait-date { display: block; color: var(--muted); margin-top: 11px; font-size: 10px; line-height: 1.6; }
 main::before {
   content: ''; position: absolute; left: 50%; top: 52%; z-index: -1;
@@ -240,7 +263,7 @@ main::before {
 .greeting { width: fit-content; max-width: 100%; margin: 0 auto 8px; transform-origin: top left; position: relative; z-index: 1; text-align: center; }
 .occasion { margin: 0 0 10px; font-size: 13px; color: var(--muted); }
 .occasion span { margin-left: 10px; color: var(--ink); font-weight: 600; }
-h1, h2, .letter-recipient { font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif; font-weight: 400; }
+h1, h2, .letter-recipient { font-family: "Noto Serif", "Palatino Linotype", "Times New Roman", serif; font-weight: 400; }
 h1 { margin: 0; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.08; letter-spacing: -1.3px; }
 .greeting-caption { font-size: 14px; color: var(--muted); margin: 10px 0 0; }
 .bouquet-composition {
@@ -278,13 +301,13 @@ h1 { margin: 0; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.08; letter-s
 .envelope-letter {
   position: absolute; inset: -11px 9px 9px; padding: 12px 0 0;
   background: var(--paper); border: 1px solid var(--line);
-  font-family: Georgia, serif; font-style: italic; font-size: 13px;
+  font-family: "Noto Serif", serif; font-style: italic; font-size: 13px;
   transition: transform .4s ease;
 }
 .envelope-seal {
   position: absolute; left: calc(50% - 12px); top: 28px; z-index: 4;
   width: 24px; height: 24px; border-radius: 50%; background: #b85575;
-  color: #fff6f8; font: 19px/24px Georgia, serif; box-shadow: 0 2px 3px #76364d22;
+  color: #fff6f8; font: 19px/24px "Noto Serif", serif; box-shadow: 0 2px 3px #76364d22;
 }
 .envelope-caption, .envelope-action { display: block; font-size: 11px; line-height: 1.5; }
 .envelope-caption { color: var(--muted); }
@@ -295,7 +318,7 @@ h1 { margin: 0; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.08; letter-s
 }
 .scene-footer { transform-origin: top left; width: min(100%, 540px); margin-top: 6px; text-align: center; position: relative; z-index: 1; }
 .bouquet-hint { font-size: 12px; color: var(--muted); margin: 0; }
-.rose-wish { font: italic 17px/1.6 Georgia, serif; margin: 6px auto 2px; max-width: 440px; min-height: 54px; text-wrap: pretty; }
+.rose-wish { font: italic 17.5px/1.65 "Noto Serif", "Palatino Linotype", "Times New Roman", serif; margin: 6px auto 2px; max-width: 440px; min-height: 54px; text-wrap: pretty; }
 .rose-wish:empty { min-height: 0; margin: 0; }
 .rose-wish.is-new { animation: wish-arrival .4s ease both; }
 .text-button { border: 0; background: transparent; padding: 12px 8px; font-size: 12px; text-decoration: underline; text-underline-offset: 4px; }
@@ -438,7 +461,7 @@ h1 { margin: 0; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.08; letter-s
 /* Header & Date */
 .letter-date {
   display: flex; align-items: center; justify-content: center; gap: 14px;
-  font: 30px/1 "Palatino Linotype", Georgia, serif; color: #8e2b48;
+  font: 30px/1 "Noto Serif", "Palatino Linotype", serif; color: #8e2b48;
   letter-spacing: 1px; margin: 0 auto 6px;
 }
 .date-stem { width: 1.5px; height: 26px; background: #e59fb3; transform: rotate(22deg); }
@@ -458,20 +481,20 @@ h1 { margin: 0; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.08; letter-s
 
 /* Letter Recipient */
 .letter-recipient {
-  margin: 0 0 8px; font: 400 19px/1.4 "Palatino Linotype", Georgia, serif;
+  margin: 0 0 8px; font: 400 19px/1.4 "Noto Serif", "Palatino Linotype", serif;
   color: #76364d; text-align: center; overflow-wrap: anywhere;
 }
 
 /* Card Title */
 #cardTitle {
   margin: 0 auto 6px; text-align: center;
-  font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-family: "Noto Serif", "Palatino Linotype", serif;
   font-size: clamp(24px, 3.2vw, 32px); line-height: 1.25;
   color: #5c1830; letter-spacing: -.6px;
 }
 
 .letter-flower {
-  text-align: center; font: 25px/1 Georgia, serif;
+  text-align: center; font: 25px/1 "Noto Serif", serif;
   color: #d6718d; margin: 6px 0 10px;
 }
 
@@ -492,7 +515,7 @@ h1 { margin: 0; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.08; letter-s
   margin: 0 0 4px; font-size: 13px; color: var(--muted);
 }
 .letter-signature {
-  font: italic 24px/1.35 "Palatino Linotype", Georgia, serif;
+  font: italic 24px/1.35 "Noto Serif", "Palatino Linotype", serif;
   color: #5c1830; margin: 0; overflow-wrap: anywhere;
 }
 
@@ -544,7 +567,7 @@ h1 { margin: 0; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.08; letter-s
 .memory-album.is-spread .album-card:nth-child(1) { --photo-angle: -4deg; }
 .memory-album.is-spread .album-card:nth-child(2) { --photo-angle: 2deg; animation-delay: .13s; }
 .memory-album.is-spread .album-card:nth-child(3) { --photo-angle: -2deg; animation-delay: .26s; }
-.album-footnote { margin: 22px 0 0; color: var(--muted); font: italic 15px/1.7 Georgia, serif; }
+.album-footnote { margin: 22px 0 0; color: var(--muted); font: italic 15px/1.7 "Noto Serif", serif; }
 @keyframes photo-unfold {
   from { opacity: 0; transform: translateY(22px) rotate(0); }
   to { opacity: 1; transform: translateY(0) rotate(var(--photo-angle)); }

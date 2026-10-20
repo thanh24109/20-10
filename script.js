@@ -994,7 +994,7 @@ function drawWrappingPaperFrontAndRibbon(ctx, cx, cy, scale, time) {
   ctx.stroke();
 
   ctx.fillStyle = '#B83B5E';
-  ctx.font = 'italic 600 10px Georgia, serif';
+  ctx.font = 'italic 600 10px "Noto Serif", serif';
   ctx.textAlign = 'center';
   ctx.fillText('20 • 10', 0, 16);
   ctx.restore();
@@ -1656,10 +1656,7 @@ function initBackgroundMusic() {
   if (!audio || !toggleBtn) return;
   musicInitialized = true;
 
-  let isPlaying = !audio.paused;
-
   function updateUI(playing) {
-    isPlaying = playing;
     toggleBtn.setAttribute('aria-pressed', String(playing));
     if (playing) {
       toggleBtn.classList.remove('is-paused');
@@ -1675,12 +1672,20 @@ function initBackgroundMusic() {
     }
   }
 
-  // Sync state if audio plays or pauses via any source
+  // Always sync UI with true audio state
   audio.addEventListener('play', () => updateUI(true));
   audio.addEventListener('pause', () => updateUI(false));
+  audio.addEventListener('ended', () => {
+    audio.currentTime = 0;
+    playAudio();
+  });
 
   function playAudio() {
     audio.volume = 0.85;
+    // If the audio source was interrupted during navigation, reload cleanly
+    if (audio.error || audio.readyState === 0) {
+      try { audio.load(); } catch (e) {}
+    }
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise
@@ -1688,9 +1693,12 @@ function initBackgroundMusic() {
           updateUI(true);
         })
         .catch(err => {
-          // Browser prevented autoplay before interaction
+          // Autoplay restricted until interaction
           updateUI(false);
-          if (hintEl) hintEl.hidden = false;
+          if (hintEl && sessionStorage.getItem('music_user_paused') !== 'true') {
+            hintEl.hidden = false;
+          }
+          bindGestureUnlock();
         });
     }
   }
@@ -1700,39 +1708,114 @@ function initBackgroundMusic() {
     updateUI(false);
   }
 
+  // Toggle button uses actual audio.paused state, eliminating desync
   toggleBtn.addEventListener('click', event => {
     event.stopPropagation();
-    if (isPlaying) {
+    if (!audio.paused) {
+      sessionStorage.setItem('music_user_paused', 'true');
       pauseAudio();
     } else {
+      sessionStorage.removeItem('music_user_paused');
+      if (audio.error || audio.readyState === 0) {
+        try { audio.load(); } catch (e) {}
+      }
       playAudio();
     }
   });
 
-  // Attempt autoplay immediately
-  if (audio.paused) {
-    playAudio();
-  } else {
-    updateUI(true);
+  // Re-armable gesture unlocker
+  const gestureEvents = ['click', 'pointerdown', 'touchstart', 'mousedown', 'keydown', 'scroll'];
+  let gestureBound = false;
+
+  function unlockOnGesture() {
+    unbindGestureUnlock();
+    if (sessionStorage.getItem('music_user_paused') !== 'true') {
+      if (audio.paused) {
+        playAudio();
+      }
+    }
   }
 
-  // If autoplay is blocked by browser policy before first interaction,
-  // trigger smoothly on the very first touch, click, scroll or keypress anywhere on screen
-  const gestureEvents = ['click', 'pointerdown', 'touchstart', 'mousedown', 'keydown', 'scroll'];
-  const unlockAudio = () => {
-    if (audio.paused) {
-      playAudio();
-    }
+  function bindGestureUnlock() {
+    if (gestureBound) return;
+    gestureBound = true;
     gestureEvents.forEach(evt => {
-      window.removeEventListener(evt, unlockAudio, true);
+      window.addEventListener(evt, unlockOnGesture, { once: true, capture: true });
     });
-  };
-  gestureEvents.forEach(evt => {
-    window.addEventListener(evt, unlockAudio, { once: true, capture: true });
+  }
+
+  function unbindGestureUnlock() {
+    if (!gestureBound) return;
+    gestureBound = false;
+    gestureEvents.forEach(evt => {
+      window.removeEventListener(evt, unlockOnGesture, true);
+    });
+  }
+
+  // Handle page return (from bfcache, back button, or returning to tab)
+  function handlePageReturn() {
+    // If audio is already playing, simply sync UI
+    if (!audio.paused) {
+      updateUI(true);
+      return;
+    }
+
+    // If user didn't intentionally pause it, resume playing
+    if (sessionStorage.getItem('music_user_paused') !== 'true') {
+      // Restore playback position if saved
+      try {
+        const savedPos = parseFloat(sessionStorage.getItem('music_saved_pos') || '0');
+        if (savedPos > 0 && Math.abs(audio.currentTime - savedPos) > 1) {
+          audio.currentTime = savedPos;
+        }
+      } catch (e) {}
+
+      playAudio();
+      bindGestureUnlock();
+    } else {
+      updateUI(false);
+    }
+  }
+
+  // Save current position when navigating away (e.g. to garden.html)
+  window.addEventListener('pagehide', () => {
+    try {
+      if (!isNaN(audio.currentTime) && audio.currentTime > 0) {
+        sessionStorage.setItem('music_saved_pos', String(audio.currentTime));
+      }
+    } catch (e) {}
   });
+
+  // Pageshow event fires on back/forward cache restores and normal loads
+  window.addEventListener('pageshow', event => {
+    handlePageReturn();
+  });
+
+  // Visibility change when tab or window switches
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      handlePageReturn();
+    }
+  });
+
+  // Initial attempt
+  try {
+    const savedPos = parseFloat(sessionStorage.getItem('music_saved_pos') || '0');
+    if (savedPos > 0) {
+      audio.currentTime = savedPos;
+    }
+  } catch (e) {}
+
+  if (sessionStorage.getItem('music_user_paused') !== 'true') {
+    playAudio();
+  } else {
+    updateUI(false);
+  }
+
+  bindGestureUnlock();
 }
 
-// Initialize audio immediately as script loads without waiting for images/canvases
+// Initialize audio immediately as script loads without waiting for heavy images
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initBackgroundMusic, { once: true });
 } else {
