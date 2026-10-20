@@ -1661,14 +1661,14 @@ function initBackgroundMusic() {
     if (playing) {
       toggleBtn.classList.remove('is-paused');
       if (discIcon) discIcon.classList.add('is-spinning');
-      if (statusText) statusText.textContent = 'Đi Giữa Trời Rực Rỡ';
-      toggleBtn.setAttribute('aria-label', 'Tạm dừng nhạc Đi Giữa Trời Rực Rỡ');
+      if (statusText) statusText.textContent = 'Em Xinh - MONO';
+      toggleBtn.setAttribute('aria-label', 'Tạm dừng nhạc Em Xinh - MONO');
       if (hintEl) hintEl.hidden = true;
     } else {
       toggleBtn.classList.add('is-paused');
       if (discIcon) discIcon.classList.remove('is-spinning');
       if (statusText) statusText.textContent = 'Bật nhạc ♫';
-      toggleBtn.setAttribute('aria-label', 'Phát nhạc Đi Giữa Trời Rực Rỡ');
+      toggleBtn.setAttribute('aria-label', 'Phát nhạc Em Xinh - MONO');
     }
   }
 
