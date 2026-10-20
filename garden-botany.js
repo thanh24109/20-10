@@ -68,6 +68,24 @@ const ROSE_PALETTES = {
     lipHighlight: '#FFF0F5',
     creviceShadow: 'rgba(92, 16, 40, 0.32)'
   },
+  crimsonVelvet: {
+    deepCore: '#500614',
+    innerShadow: '#7D0C22',
+    midBelly: '#BD1433',
+    outerBlush: '#E02447',
+    lipHighlight: '#FFD1DA',
+    creviceShadow: 'rgba(60, 4, 14, 0.40)',
+    shadowTone: '#4A0815'
+  },
+  scarletRuby: {
+    deepCore: '#640818',
+    innerShadow: '#941126',
+    midBelly: '#D01C3A',
+    outerBlush: '#F03856',
+    lipHighlight: '#FFDDE3',
+    creviceShadow: 'rgba(72, 6, 18, 0.35)',
+    shadowTone: '#540A18'
+  },
   paleGreen: {
     deepCore: '#6B9062',
     innerShadow: '#99B984',

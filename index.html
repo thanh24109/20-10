@@ -13,7 +13,36 @@
 </head>
 <body>
   <main>
-    <a class="garden-link" href="./garden.html">Ngắm vườn hoa <span aria-hidden="true">❀</span></a>
+    <nav class="top-nav-bar" aria-label="Tiện ích đầu trang">
+      <div class="music-disc-widget">
+        <button id="toggleMusic" class="music-disc-button" type="button" aria-pressed="true" aria-label="Tạm dừng hoặc phát nhạc Đi Giữa Trời Rực Rỡ">
+          <span class="music-disc-icon is-spinning" id="musicDiscIcon" aria-hidden="true">
+            <span class="disc-vinyl"></span>
+            <span class="disc-core">♫</span>
+          </span>
+          <span class="music-disc-text" id="musicStatusText">Đi Giữa Trời Rực Rỡ</span>
+          <span class="music-wave-bars" id="musicWaveBars" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+        </button>
+        <span id="musicAutoplayHint" class="music-autoplay-hint" hidden aria-live="polite">✨ Chạm bất kỳ đâu để bật nhạc ♫</span>
+        <audio id="bgMusic" src="./assets/music.mp3" autoplay loop preload="auto">
+          <source src="./assets/music.mp3" type="audio/mpeg">
+          <source src="./YTSave.to_YouTube_Media_pjm2aXT3A2M_Nh%E1%BA%A1c-phim-%C4%90i-Gi%E1%BB%AFa-Tr%E1%BB%9Di-R%E1%BB%B1c-R%E1%BB%A1-Ng%C3%B4-Lan-H%C6%B0%C6%A1ng-MV-Lyrics_009_vbr.mp3" type="audio/mpeg">
+        </audio>
+        <script>
+          (function() {
+            var m = document.getElementById('bgMusic');
+            if (m) {
+              m.volume = 0.85;
+              var p = m.play();
+              if (p && p.catch) { p.catch(function() {}); }
+            }
+          })();
+        </script>
+      </div>
+      <a class="garden-link" href="./garden.html">Ngắm vườn hoa <span aria-hidden="true">❀</span></a>
+    </nav>
     <canvas id="ambientPetalsCanvas" aria-hidden="true"></canvas>
     <header class="greeting">
       <p class="occasion">Ngày Phụ nữ Việt Nam <span>20/10</span></p>
@@ -28,7 +57,7 @@
         <div class="gift-visuals">
           <div class="bouquet-composition">
             <div id="bouquetStageWrapper" role="button" tabindex="0"
-              aria-label="Bó hoa hồng. Nhấn Enter để nhận lời chúc; dùng phím mũi tên để chọn bông hoa."
+              aria-label="Bó hoa hồng đỏ đan xen lẫn hồng phấn. Nhấn Enter để nhận lời chúc; dùng phím mũi tên để chọn bông hoa."
               aria-describedby="bouquetHint">
               <canvas id="bouquetCanvas" aria-hidden="true"></canvas>
             </div>
@@ -50,15 +79,34 @@
 
       <dialog id="greetingCard" class="card-dialog" aria-labelledby="cardTitle">
         <div class="letter-paper">
+          <!-- 4 Corner Floral Embellishments -->
+          <div class="card-corner card-corner-tl" aria-hidden="true">
+            <img src="./assets/card-corner-top.jpg" alt="" class="card-corner-img" width="300" height="300" decoding="async">
+          </div>
+          <div class="card-corner card-corner-tr" aria-hidden="true">
+            <img src="./assets/card-corner-top.jpg" alt="" class="card-corner-img" width="300" height="300" decoding="async">
+          </div>
+          <div class="card-corner card-corner-bl" aria-hidden="true">
+            <img src="./assets/card-corner-bottom.jpg" alt="" class="card-corner-img" width="300" height="300" decoding="async">
+          </div>
+          <div class="card-corner card-corner-br" aria-hidden="true">
+            <img src="./assets/card-corner-bottom.jpg" alt="" class="card-corner-img" width="300" height="300" decoding="async">
+          </div>
+
+          <!-- Ornate Double Frame with Corner Accents -->
+          <div class="card-frame" aria-hidden="true"></div>
+          <div class="card-frame-inner" aria-hidden="true"></div>
+
           <button class="close-button" id="closeCard" type="button" aria-label="Đóng thiệp">×</button>
           <div id="cardReading">
             <div class="letter-date" aria-label="Ngày 20 tháng 10"><span>20</span><span class="date-stem" aria-hidden="true"></span><span>10</span></div>
+            <div class="card-ornament-line" aria-hidden="true"><span class="ornament-stem"></span><span class="ornament-flower">❀</span><span class="ornament-stem"></span></div>
             <p class="letter-recipient">Gửi <span id="cardRecipient">bạn</span>,</p>
             <h2 id="cardTitle">Chúc bạn một ngày<br>thật nhiều yêu thương.</h2>
             <div class="letter-flower" aria-hidden="true">❀</div>
             <p id="cardMessage" class="letter-message"></p>
             <div class="letter-signoff"><p>Với thật nhiều thương mến,</p><p id="cardSender" class="letter-signature"></p></div>
-            <div class="letter-fold" aria-hidden="true"></div>
+            <div class="card-ornament-line card-ornament-bottom" aria-hidden="true"><span class="ornament-stem"></span><span class="ornament-heart">♡</span><span class="ornament-stem"></span></div>
             <div class="letter-actions"><button id="viewAlbum" class="text-button" type="button" aria-controls="memoryAlbum">Xem album kỷ niệm <span aria-hidden="true">♡</span></button><button id="editCard" class="text-button" type="button">Viết lời chúc riêng <span aria-hidden="true">✎</span></button></div>
           </div>
           <form id="cardEditor" hidden>

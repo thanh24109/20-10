@@ -62,6 +62,46 @@ const ROSE_PALETTES = {
     outerBlush: '#F8BDCE',
     lipHighlight: '#FFF0F5',
     creviceShadow: 'rgba(92, 16, 40, 0.32)'
+  },
+  crimsonVelvet: {
+    deepCore: '#500614',
+    innerShadow: '#7D0C22',
+    midBelly: '#BD1433',
+    outerBlush: '#E02447',
+    lipHighlight: '#FFD1DA',
+    creviceShadow: 'rgba(60, 4, 14, 0.40)'
+  },
+  scarletRuby: {
+    deepCore: '#640818',
+    innerShadow: '#941126',
+    midBelly: '#D01C3A',
+    outerBlush: '#F03856',
+    lipHighlight: '#FFDDE3',
+    creviceShadow: 'rgba(72, 6, 18, 0.35)'
+  },
+  velvetRed: {
+    deepCore: '#500614',
+    innerShadow: '#7D0C22',
+    midBelly: '#BD1433',
+    outerBlush: '#E02447',
+    lipHighlight: '#FFD1DA',
+    creviceShadow: 'rgba(60, 4, 14, 0.40)'
+  },
+  rubyRed: {
+    deepCore: '#640818',
+    innerShadow: '#941126',
+    midBelly: '#D01C3A',
+    outerBlush: '#F03856',
+    lipHighlight: '#FFDDE3',
+    creviceShadow: 'rgba(72, 6, 18, 0.35)'
+  },
+  blushingCrimson: {
+    deepCore: '#6B0A1E',
+    innerShadow: '#9E132D',
+    midBelly: '#D62244',
+    outerBlush: '#F7708C',
+    lipHighlight: '#FFF0F4',
+    creviceShadow: 'rgba(75, 6, 18, 0.32)'
   }
 };
 
@@ -963,37 +1003,38 @@ function drawWrappingPaperFrontAndRibbon(ctx, cx, cy, scale, time) {
   ctx.restore(); // end scale/translate
 }
 
-// Define the complete arrangement of 25 roses (back layer, mid dome, hero front blooms, and outer buds)
+// Define the complete arrangement of 22 roses (back layer, mid dome, hero front blooms, and outer buds)
+// Red roses (crimsonVelvet, scarletRuby) are artfully interwoven with pink roses (sweetBlush, pastelPink, pearlVintage, creamPeach)
 const BOUQUET_LAYOUT = [
   // TIER 1: Upper & Outer Halo Rosebuds & Arching Blooms (Back Depth)
-  { x: -128, y: -165, r: 44, paletteKey: 'pastelPink', variety: 'bud', tiltX: -0.35, tiltY: -0.35, z: 1, seed: 11 },
-  { x: -62,  y: -192, r: 48, paletteKey: 'creamPeach', variety: 'classic', tiltX: -0.18, tiltY: -0.4, z: 1, seed: 12 },
-  { x: 8,    y: -202, r: 50, paletteKey: 'sweetBlush', variety: 'garden', tiltX: 0.02, tiltY: -0.42, z: 1, seed: 13 },
+  { x: -128, y: -165, r: 44, paletteKey: 'scarletRuby', variety: 'bud', tiltX: -0.35, tiltY: -0.35, z: 1, seed: 11 },
+  { x: -62,  y: -192, r: 48, paletteKey: 'sweetBlush', variety: 'classic', tiltX: -0.18, tiltY: -0.4, z: 1, seed: 12 },
+  { x: 8,    y: -202, r: 50, paletteKey: 'crimsonVelvet', variety: 'garden', tiltX: 0.02, tiltY: -0.42, z: 1, seed: 13 },
   { x: 76,   y: -188, r: 47, paletteKey: 'pastelPink', variety: 'classic', tiltX: 0.22, tiltY: -0.38, z: 1, seed: 14 },
-  { x: 134,  y: -158, r: 44, paletteKey: 'pearlVintage', variety: 'bud', tiltX: 0.38, tiltY: -0.32, z: 1, seed: 15 },
+  { x: 134,  y: -158, r: 44, paletteKey: 'pastelPink', variety: 'bud', tiltX: 0.38, tiltY: -0.32, z: 1, seed: 15 },
   { x: -172, y: -98,  r: 45, paletteKey: 'sweetBlush', variety: 'bud', tiltX: -0.45, tiltY: -0.15, z: 1, seed: 16 },
-  { x: 174,  y: -92,  r: 45, paletteKey: 'creamPeach', variety: 'bud', tiltX: 0.45, tiltY: -0.15, z: 1, seed: 17 },
+  { x: 174,  y: -92,  r: 45, paletteKey: 'scarletRuby', variety: 'bud', tiltX: 0.45, tiltY: -0.15, z: 1, seed: 17 },
 
   // TIER 2: Lush Mid-Dome Roses (Creating full volume and rich shadow pockets)
   { x: -115, y: -112, r: 56, paletteKey: 'pearlVintage', variety: 'garden', tiltX: -0.26, tiltY: -0.22, z: 2, seed: 21, hasDewdrop: true },
-  { x: -38,  y: -138, r: 60, paletteKey: 'berryRomance', variety: 'peony', tiltX: -0.1, tiltY: -0.24, z: 2, seed: 22 },
-  { x: 44,   y: -135, r: 58, paletteKey: 'creamPeach', variety: 'garden', tiltX: 0.12, tiltY: -0.24, z: 2, seed: 23, hasDewdrop: true },
-  { x: 118,  y: -108, r: 56, paletteKey: 'sweetBlush', variety: 'classic', tiltX: 0.28, tiltY: -0.2, z: 2, seed: 24 },
-  { x: -150, y: -32,  r: 55, paletteKey: 'pastelPink', variety: 'classic', tiltX: -0.35, tiltY: 0.02, z: 2, seed: 25 },
-  { x: 152,  y: -28,  r: 55, paletteKey: 'pearlVintage', variety: 'garden', tiltX: 0.35, tiltY: 0.02, z: 2, seed: 26 },
+  { x: -38,  y: -138, r: 60, paletteKey: 'crimsonVelvet', variety: 'peony', tiltX: -0.1, tiltY: -0.24, z: 2, seed: 22 },
+  { x: 44,   y: -135, r: 58, paletteKey: 'sweetBlush', variety: 'garden', tiltX: 0.12, tiltY: -0.24, z: 2, seed: 23, hasDewdrop: true },
+  { x: 118,  y: -108, r: 56, paletteKey: 'scarletRuby', variety: 'classic', tiltX: 0.28, tiltY: -0.2, z: 2, seed: 24 },
+  { x: -150, y: -32,  r: 55, paletteKey: 'crimsonVelvet', variety: 'classic', tiltX: -0.35, tiltY: 0.02, z: 2, seed: 25 },
+  { x: 152,  y: -28,  r: 55, paletteKey: 'sweetBlush', variety: 'garden', tiltX: 0.35, tiltY: 0.02, z: 2, seed: 26 },
   { x: -118, y: 38,   r: 54, paletteKey: 'creamPeach', variety: 'classic', tiltX: -0.28, tiltY: 0.24, z: 2, seed: 27 },
-  { x: 120,  y: 42,   r: 54, paletteKey: 'berryRomance', variety: 'classic', tiltX: 0.28, tiltY: 0.24, z: 2, seed: 28 },
+  { x: 120,  y: 42,   r: 54, paletteKey: 'crimsonVelvet', variety: 'classic', tiltX: 0.28, tiltY: 0.24, z: 2, seed: 28 },
 
   // TIER 3: Grand Hero Centerpiece Roses (Fullest, largest David Austin & French blooms)
-  { x: -78,  y: -58,  r: 65, paletteKey: 'sweetBlush', variety: 'peony', tiltX: -0.14, tiltY: -0.08, z: 3, seed: 31, hasDewdrop: true },
-  { x: 78,   y: -55,  r: 64, paletteKey: 'pastelPink', variety: 'garden', tiltX: 0.15, tiltY: -0.08, z: 3, seed: 32 },
-  { x: -58,  y: 25,   r: 63, paletteKey: 'pearlVintage', variety: 'garden', tiltX: -0.12, tiltY: 0.16, z: 3, seed: 33, hasDewdrop: true },
+  { x: -78,  y: -58,  r: 65, paletteKey: 'pastelPink', variety: 'peony', tiltX: -0.14, tiltY: -0.08, z: 3, seed: 31, hasDewdrop: true },
+  { x: 78,   y: -55,  r: 64, paletteKey: 'scarletRuby', variety: 'garden', tiltX: 0.15, tiltY: -0.08, z: 3, seed: 32 },
+  { x: -58,  y: 25,   r: 63, paletteKey: 'crimsonVelvet', variety: 'garden', tiltX: -0.12, tiltY: 0.16, z: 3, seed: 33, hasDewdrop: true },
   { x: 60,   y: 28,   r: 62, paletteKey: 'sweetBlush', variety: 'classic', tiltX: 0.12, tiltY: 0.16, z: 3, seed: 34, hasDewdrop: true },
   { x: 0,    y: 48,   r: 60, paletteKey: 'creamPeach', variety: 'peony', tiltX: 0.0, tiltY: 0.22, z: 3, seed: 35 },
 
   // TIER 4: The Crown Jewel Center Rose
-  { x: 0,    y: -78,  r: 66, paletteKey: 'creamPeach', variety: 'garden', tiltX: 0.0, tiltY: -0.12, z: 4, seed: 41, hasDewdrop: true },
-  { x: -2,   y: -10,  r: 72, paletteKey: 'sweetBlush', variety: 'peony', tiltX: 0.0, tiltY: 0.02, z: 4, seed: 42, hasDewdrop: true }
+  { x: 0,    y: -78,  r: 66, paletteKey: 'sweetBlush', variety: 'garden', tiltX: 0.0, tiltY: -0.12, z: 4, seed: 41, hasDewdrop: true },
+  { x: -2,   y: -10,  r: 72, paletteKey: 'crimsonVelvet', variety: 'peony', tiltX: 0.0, tiltY: 0.02, z: 4, seed: 42, hasDewdrop: true }
 ];
 
 // Foliage & Eucalyptus Sprigs around the dome
@@ -1184,10 +1225,12 @@ const burstSparkles = [];
 
 function createPetalParticle(customX, customY, isBurst = false) {
   const colors = [
-    ['#FFF0F4', '#F7A8BE'],
-    ['#FFE5EC', '#E87A99'],
-    ['#FFF8F5', '#F9C5BD'],
-    ['#FCE4EC', '#D95B7D']
+    ['#FFF0F4', '#F7A8BE'], // blush pink
+    ['#FFE5EC', '#E87A99'], // pastel pink
+    ['#FFD1DA', '#C41837'], // velvet red
+    ['#FFDDE3', '#DC223E'], // ruby scarlet
+    ['#FFF8F5', '#F9C5BD'], // peach cream
+    ['#FCE4EC', '#D95B7D']  // rose berry
   ];
   const pair = colors[Math.floor(Math.random() * colors.length)];
   return {
@@ -1234,7 +1277,7 @@ function spawnPetalBurst(screenX, screenY, count = 8) {
       vy: Math.sin(angle) * speed - 0.6,
       r: 1.8 + Math.random() * 2.5,
       alpha: 1,
-      color: i % 2 === 0 ? '#FFF6F8' : '#F48FB1'
+      color: i % 3 === 0 ? '#FFF6F8' : (i % 3 === 1 ? '#F48FB1' : '#E52E3F')
     });
   }
 }
@@ -1599,6 +1642,101 @@ function setupInteractions() {
     const rect = bouquetCanvas.getBoundingClientRect();
     spawnPetalBurst(rect.left + stageW * 0.5, rect.top + stageH * 0.5, 10);
   });
+  initBackgroundMusic();
+}
+
+let musicInitialized = false;
+function initBackgroundMusic() {
+  if (musicInitialized) return;
+  const audio = document.getElementById('bgMusic');
+  const toggleBtn = document.getElementById('toggleMusic');
+  const discIcon = document.getElementById('musicDiscIcon');
+  const statusText = document.getElementById('musicStatusText');
+  const hintEl = document.getElementById('musicAutoplayHint');
+  if (!audio || !toggleBtn) return;
+  musicInitialized = true;
+
+  let isPlaying = !audio.paused;
+
+  function updateUI(playing) {
+    isPlaying = playing;
+    toggleBtn.setAttribute('aria-pressed', String(playing));
+    if (playing) {
+      toggleBtn.classList.remove('is-paused');
+      if (discIcon) discIcon.classList.add('is-spinning');
+      if (statusText) statusText.textContent = 'Đi Giữa Trời Rực Rỡ';
+      toggleBtn.setAttribute('aria-label', 'Tạm dừng nhạc Đi Giữa Trời Rực Rỡ');
+      if (hintEl) hintEl.hidden = true;
+    } else {
+      toggleBtn.classList.add('is-paused');
+      if (discIcon) discIcon.classList.remove('is-spinning');
+      if (statusText) statusText.textContent = 'Bật nhạc ♫';
+      toggleBtn.setAttribute('aria-label', 'Phát nhạc Đi Giữa Trời Rực Rỡ');
+    }
+  }
+
+  // Sync state if audio plays or pauses via any source
+  audio.addEventListener('play', () => updateUI(true));
+  audio.addEventListener('pause', () => updateUI(false));
+
+  function playAudio() {
+    audio.volume = 0.85;
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          updateUI(true);
+        })
+        .catch(err => {
+          // Browser prevented autoplay before interaction
+          updateUI(false);
+          if (hintEl) hintEl.hidden = false;
+        });
+    }
+  }
+
+  function pauseAudio() {
+    audio.pause();
+    updateUI(false);
+  }
+
+  toggleBtn.addEventListener('click', event => {
+    event.stopPropagation();
+    if (isPlaying) {
+      pauseAudio();
+    } else {
+      playAudio();
+    }
+  });
+
+  // Attempt autoplay immediately
+  if (audio.paused) {
+    playAudio();
+  } else {
+    updateUI(true);
+  }
+
+  // If autoplay is blocked by browser policy before first interaction,
+  // trigger smoothly on the very first touch, click, scroll or keypress anywhere on screen
+  const gestureEvents = ['click', 'pointerdown', 'touchstart', 'mousedown', 'keydown', 'scroll'];
+  const unlockAudio = () => {
+    if (audio.paused) {
+      playAudio();
+    }
+    gestureEvents.forEach(evt => {
+      window.removeEventListener(evt, unlockAudio, true);
+    });
+  };
+  gestureEvents.forEach(evt => {
+    window.addEventListener(evt, unlockAudio, { once: true, capture: true });
+  });
+}
+
+// Initialize audio immediately as script loads without waiting for images/canvases
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initBackgroundMusic, { once: true });
+} else {
+  initBackgroundMusic();
 }
 
 window.addEventListener('load', () => {

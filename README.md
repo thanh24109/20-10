@@ -28,12 +28,13 @@ Mở `garden.html` trực tiếp trong trình duyệt, chọn **Ngắm vườn h
 
 ## Trải nghiệm
 
-- Bó hoa nở trước, sau đó xuất hiện phong bì để người xem tự mở thiệp.
+- Bó hoa kết hợp hoa hồng đỏ nhung và đỏ ruby đan xen hài hòa với hoa hồng phấn, kem đào; nở trước khi xuất hiện phong bì để người xem tự mở thiệp.
 - Chạm từng bông hoa để nhận một lời chúc nhỏ. Khi dùng bàn phím, Tab đến bó hoa rồi nhấn Enter, Space hoặc các phím mũi tên.
-- Chọn **Mở thiệp** để đọc lời chúc; đóng bằng nút ×, phím Escape hoặc **Gấp thiệp** trên phong bì.
+- Chọn **Mở thiệp** để đọc lời chúc trong tấm thiệp được thiết kế viền hoa trang nhã ở 4 góc kèm khung viền đôi cổ điển; đóng bằng nút ×, phím Escape hoặc **Gấp thiệp** trên phong bì.
 - Hoa và tiêu đề được căn giữa khi vào trang. Khi mở thiệp, cả cụm hoa và thiệp được cân giữa; trang tự chia cột trên màn hình rộng và xếp thiệp xuống dưới trên màn hình hẹp. Thiệp nằm trong luồng trang, nên tiêu đề, ảnh, hoa và lời chúc không bị che; có thể tiếp tục tương tác với hoa khi thiệp mở.
 - Chọn **Viết lời chúc riêng** để sửa người nhận, nội dung và chữ ký. **Lưu lời chúc** cập nhật thiệp và lưu trên trình duyệt hiện tại; **Hủy** bỏ các sửa đổi chưa lưu. Nội dung không tự gửi sang thiết bị hay trình duyệt khác.
 - Chọn **Cho hoa nở lại** để xem lại hiệu ứng.
+- Đĩa nhạc Zing MP3 được nhúng cạnh nút **Ngắm vườn hoa** ở góc trên bên phải, có biểu tượng đĩa than xoay nhẹ và có thể nhấp để thu gọn hoặc mở rộng bảng phát nhạc.
 - Thiệp dài tự tăng chiều cao và cuộn cùng trang. Trang tôn trọng thiết lập giảm chuyển động và tạm dừng hoạt ảnh khi tab bị ẩn.
 
 ## Album kỷ niệm và thay ảnh
