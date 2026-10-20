@@ -99,14 +99,73 @@
     }
     .garden-actions button:hover, .garden-actions a:hover { background: #fae7ef; transform: translateY(-1px); }
     .header-back-wrap { display: flex; flex-direction: column; gap: 8px; pointer-events: auto; }
+    .header-nav-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .garden-back-link {
-      display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px;
-      color: var(--ink); text-decoration: none; background: rgba(255, 253, 252, 0.9);
-      border: 1px solid #ebd0da; padding: 6px 14px; border-radius: 20px;
-      box-shadow: 0 2px 8px rgba(118, 54, 77, 0.08); transition: all .2s ease;
-      width: fit-content;
+      display: inline-flex; align-items: center; gap: 6px; font-size: 13px;
+      color: var(--ink); text-decoration: none; background: rgba(255, 253, 252, 0.92);
+      border: 1px solid #ebd0da; min-height: 44px; padding: 9px 16px; border-radius: 24px;
+      box-shadow: 0 2px 8px rgba(118, 54, 77, 0.06); transition: all .2s ease;
+      white-space: nowrap; width: fit-content;
     }
-    .garden-back-link:hover { background: #fff; border-color: #d88fa5; transform: translateX(-2px); }
+    .garden-back-link:hover {
+      background: #fdf2f6; border-color: #d88fa5; transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(118, 54, 77, 0.1);
+    }
+    /* Music Disc Widget */
+    .music-disc-widget { position: relative; display: inline-flex; align-items: center; }
+    .music-disc-button {
+      display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 9px 14px;
+      border: 1px solid #ebd0da; border-radius: 24px; background: rgba(255, 253, 252, 0.92);
+      color: var(--ink); font-size: 13px; cursor: pointer; box-shadow: 0 2px 8px rgba(118, 54, 77, 0.06);
+      transition: all .2s ease; white-space: nowrap;
+    }
+    .music-disc-button:hover {
+      background: #fdf2f6; border-color: #d88fa5; transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(118, 54, 77, 0.1);
+    }
+    .music-disc-icon {
+      position: relative; width: 22px; height: 22px; border-radius: 50%;
+      background: conic-gradient(from 0deg, #242424, #4a4a4a, #1f1f1f, #5a5a5a, #242424);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+      display: grid; place-items: center; flex-shrink: 0;
+    }
+    .music-disc-icon.is-spinning { animation: spin-vinyl 3.2s linear infinite; }
+    .disc-vinyl { position: absolute; inset: 3px; border-radius: 50%; border: 1px dashed rgba(255, 255, 255, 0.28); pointer-events: none; }
+    .disc-core {
+      position: relative; z-index: 1; width: 8px; height: 8px; border-radius: 50%;
+      background: #c7637d; color: #fff; font-size: 7px; line-height: 8px; text-align: center; display: block;
+    }
+    @keyframes spin-vinyl { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .music-wave-bars { display: inline-flex; align-items: flex-end; gap: 2.5px; height: 13px; margin-left: 2px; }
+    .music-wave-bars span {
+      display: block; width: 2px; height: 100%; background: var(--rose); border-radius: 2px;
+      transform-origin: bottom; animation: wave-bar 1.1s ease-in-out infinite alternate;
+    }
+    .music-wave-bars span:nth-child(1) { animation-duration: 0.85s; }
+    .music-wave-bars span:nth-child(2) { animation-duration: 1.25s; animation-delay: 0.2s; }
+    .music-wave-bars span:nth-child(3) { animation-duration: 1.0s; animation-delay: 0.4s; }
+    @keyframes wave-bar { 0% { transform: scaleY(0.25); opacity: 0.4; } 100% { transform: scaleY(1); opacity: 1; } }
+    .music-disc-button.is-paused {
+      background: #fff5f8; border-color: #e8a2b8; color: var(--rose);
+      animation: pulse-disc-glow 2.2s infinite ease-in-out;
+    }
+    .music-disc-button.is-paused .music-disc-icon { animation-play-state: paused; filter: grayscale(0.2) opacity(0.85); }
+    .music-disc-button.is-paused .music-wave-bars span { animation: none; transform: scaleY(0.25); opacity: 0.35; }
+    @keyframes pulse-disc-glow {
+      0%, 100% { box-shadow: 0 2px 8px rgba(199, 99, 125, 0.12); }
+      50% { box-shadow: 0 4px 16px rgba(199, 99, 125, 0.32); border-color: #d88099; }
+    }
+    .music-autoplay-hint {
+      position: absolute; top: calc(100% + 8px); left: 0; background: rgba(118, 54, 77, 0.94);
+      backdrop-filter: blur(8px); color: #fff; font-size: 11.5px; font-weight: 500; padding: 5px 12px;
+      border-radius: 16px; white-space: nowrap; pointer-events: none; animation: hint-float 2.5s infinite ease-in-out;
+      box-shadow: 0 6px 18px rgba(118, 54, 77, 0.28); z-index: 50;
+    }
+    .music-autoplay-hint::before {
+      content: ""; position: absolute; top: -5px; left: 20px; border-left: 5px solid transparent;
+      border-right: 5px solid transparent; border-bottom: 5px solid rgba(118, 54, 77, 0.94);
+    }
+    @keyframes hint-float { 0%, 100% { transform: translateY(0); opacity: 0.95; } 50% { transform: translateY(3px); opacity: 1; } }
     dialog {
       width: min(480px, calc(100% - 36px)); max-height: calc(100svh - 36px);
       padding: 0; border: 0; overflow: auto; background: var(--paper); color: var(--ink);
@@ -154,6 +213,8 @@
       .letter { padding: 35px 26px 25px; }
       .intro { top: 18%; }
       h1 { font-size: clamp(23px, 5.8vw, 28px); }
+      .garden-back-link, .music-disc-button { min-height: 38px; padding: 6px 12px; font-size: 11.5px; }
+      .music-disc-text { max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     }
     @media (max-height: 600px) and (min-width: 600px) {
       .garden { min-height: 360px; }
@@ -171,7 +232,26 @@
   <main class="garden" id="garden">
     <header class="page-header">
       <div class="header-back-wrap">
-        <a class="garden-back-link" href="./index.html" aria-label="Trở về trang bó hoa 20/10">‹ Bó hoa 20/10</a>
+        <div class="header-nav-row">
+          <a class="garden-back-link" href="./index.html" aria-label="Trở về trang bó hoa 20/10">‹ Bó hoa 20/10</a>
+          <div class="music-disc-widget">
+            <button id="toggleMusic" class="music-disc-button" type="button" aria-pressed="true" aria-label="Tạm dừng hoặc phát nhạc Đi Giữa Trời Rực Rỡ">
+              <span class="music-disc-icon is-spinning" id="musicDiscIcon" aria-hidden="true">
+                <span class="disc-vinyl"></span>
+                <span class="disc-core">♫</span>
+              </span>
+              <span class="music-disc-text" id="musicStatusText">Đi Giữa Trời Rực Rỡ</span>
+              <span class="music-wave-bars" id="musicWaveBars" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </span>
+            </button>
+            <span id="musicAutoplayHint" class="music-autoplay-hint" hidden aria-live="polite">✨ Chạm bất kỳ đâu để bật nhạc ♫</span>
+            <audio id="bgMusic" src="./assets/music.mp3" autoplay loop preload="auto">
+              <source src="./assets/music.mp3" type="audio/mpeg">
+              <source src="./YTSave.to_YouTube_Media_pjm2aXT3A2M_Nh%E1%BA%A1c-phim-%C4%90i-Gi%E1%BB%AFa-Tr%E1%BB%9Di-R%E1%BB%B1c-R%E1%BB%A1-Ng%C3%B4-Lan-H%C6%B0%C6%A1ng-MV-Lyrics_009_vbr.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+        </div>
         <p class="dedication">Dành bạn, cả một vườn thương.</p>
       </div>
       <p class="date"><span>20 / 10</span>Ngày Phụ nữ Việt Nam</p>
@@ -550,6 +630,158 @@
       motion.addEventListener('change', render);
       new ResizeObserver(resize).observe(garden);
       resize();
+    })();
+
+    // Background Music Controller for Garden Page (synchronized with index.html)
+    (function initGardenMusic() {
+      const audio = document.getElementById('bgMusic');
+      const toggleBtn = document.getElementById('toggleMusic');
+      const discIcon = document.getElementById('musicDiscIcon');
+      const statusText = document.getElementById('musicStatusText');
+      const hintEl = document.getElementById('musicAutoplayHint');
+      if (!audio || !toggleBtn) return;
+
+      function updateUI(playing) {
+        toggleBtn.setAttribute('aria-pressed', String(playing));
+        if (playing) {
+          toggleBtn.classList.remove('is-paused');
+          if (discIcon) discIcon.classList.add('is-spinning');
+          if (statusText) statusText.textContent = 'Đi Giữa Trời Rực Rỡ';
+          toggleBtn.setAttribute('aria-label', 'Tạm dừng nhạc Đi Giữa Trời Rực Rỡ');
+          if (hintEl) hintEl.hidden = true;
+        } else {
+          toggleBtn.classList.add('is-paused');
+          if (discIcon) discIcon.classList.remove('is-spinning');
+          if (statusText) statusText.textContent = 'Bật nhạc ♫';
+          toggleBtn.setAttribute('aria-label', 'Phát nhạc Đi Giữa Trời Rực Rỡ');
+        }
+      }
+
+      audio.addEventListener('play', () => updateUI(true));
+      audio.addEventListener('pause', () => updateUI(false));
+      audio.addEventListener('ended', () => {
+        audio.currentTime = 0;
+        playAudio();
+      });
+
+      function playAudio() {
+        audio.volume = 0.85;
+        if (audio.error || audio.readyState === 0) {
+          try { audio.load(); } catch (e) {}
+        }
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => updateUI(true))
+            .catch(err => {
+              updateUI(false);
+              if (hintEl && sessionStorage.getItem('music_user_paused') !== 'true') {
+                hintEl.hidden = false;
+              }
+              bindGestureUnlock();
+            });
+        }
+      }
+
+      function pauseAudio() {
+        audio.pause();
+        updateUI(false);
+      }
+
+      toggleBtn.addEventListener('click', event => {
+        event.stopPropagation();
+        if (!audio.paused) {
+          sessionStorage.setItem('music_user_paused', 'true');
+          pauseAudio();
+        } else {
+          sessionStorage.removeItem('music_user_paused');
+          if (audio.error || audio.readyState === 0) {
+            try { audio.load(); } catch (e) {}
+          }
+          playAudio();
+        }
+      });
+
+      const gestureEvents = ['click', 'pointerdown', 'touchstart', 'mousedown', 'keydown', 'scroll'];
+      let gestureBound = false;
+
+      function unlockOnGesture() {
+        unbindGestureUnlock();
+        if (sessionStorage.getItem('music_user_paused') !== 'true') {
+          if (audio.paused) {
+            playAudio();
+          }
+        }
+      }
+
+      function bindGestureUnlock() {
+        if (gestureBound) return;
+        gestureBound = true;
+        gestureEvents.forEach(evt => {
+          window.addEventListener(evt, unlockOnGesture, { once: true, capture: true });
+        });
+      }
+
+      function unbindGestureUnlock() {
+        if (!gestureBound) return;
+        gestureBound = false;
+        gestureEvents.forEach(evt => {
+          window.removeEventListener(evt, unlockOnGesture, true);
+        });
+      }
+
+      function handlePageReturn() {
+        if (!audio.paused) {
+          updateUI(true);
+          return;
+        }
+        if (sessionStorage.getItem('music_user_paused') !== 'true') {
+          try {
+            const savedPos = parseFloat(sessionStorage.getItem('music_saved_pos') || '0');
+            if (savedPos > 0 && Math.abs(audio.currentTime - savedPos) > 1) {
+              audio.currentTime = savedPos;
+            }
+          } catch (e) {}
+          playAudio();
+          bindGestureUnlock();
+        } else {
+          updateUI(false);
+        }
+      }
+
+      window.addEventListener('pagehide', () => {
+        try {
+          if (!isNaN(audio.currentTime) && audio.currentTime > 0) {
+            sessionStorage.setItem('music_saved_pos', String(audio.currentTime));
+          }
+        } catch (e) {}
+      });
+
+      window.addEventListener('pageshow', () => {
+        handlePageReturn();
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+          handlePageReturn();
+        }
+      });
+
+      // Restore saved playback position on entry from index.html
+      try {
+        const savedPos = parseFloat(sessionStorage.getItem('music_saved_pos') || '0');
+        if (savedPos > 0) {
+          audio.currentTime = savedPos;
+        }
+      } catch (e) {}
+
+      if (sessionStorage.getItem('music_user_paused') !== 'true') {
+        playAudio();
+      } else {
+        updateUI(false);
+      }
+
+      bindGestureUnlock();
     })();
   </script>
 </body>
